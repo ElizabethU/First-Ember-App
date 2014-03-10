@@ -13,6 +13,12 @@ App.PostsRoute = Ember.Route.extend({
   }
 });
 
+App.PostRoute = Ember.Route.extend({
+  model: function(params) {
+      return posts.findBy('id', params.post_id);
+  }
+});
+
 App.PostController = Ember.ObjectController.extend({
   isEditing: false,
 
@@ -26,6 +32,10 @@ App.PostController = Ember.ObjectController.extend({
       this.get('store').commit();
     }
   }
+});
+
+Ember.Handlebars.helper('format-date', function(date) {
+  return moment(date).fromNow();
 });
 
 var posts = [{

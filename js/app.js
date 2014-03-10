@@ -38,6 +38,12 @@ Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
 });
 
+Ember.Handlebars.registerBoundHelper('format-markdown', function(input) {
+  showdown = new Showdown.converter();
+  
+  return new Ember.Handlebars.SafeString(showdown.makeHtml(input));
+ });
+
 var posts = [{
   id: '1',
   title: "Rails is Omakase",
